@@ -30,6 +30,7 @@
         {
             this.btn_Click = new System.Windows.Forms.Button();
             this.bar_animacion = new System.Windows.Forms.ProgressBar();
+            this.lbl_txt_1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Click
@@ -58,12 +59,22 @@
             this.bar_animacion.Step = 5;
             this.bar_animacion.TabIndex = 1;
             // 
+            // lbl_txt_1
+            // 
+            this.lbl_txt_1.Font = new System.Drawing.Font("Calibri", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_txt_1.Location = new System.Drawing.Point(320, 46);
+            this.lbl_txt_1.Name = "lbl_txt_1";
+            this.lbl_txt_1.Size = new System.Drawing.Size(246, 57);
+            this.lbl_txt_1.TabIndex = 2;
+            this.lbl_txt_1.Text = "Welcome";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
-            this.ClientSize = new System.Drawing.Size(760, 450);
+            this.ClientSize = new System.Drawing.Size(872, 455);
+            this.Controls.Add(this.lbl_txt_1);
             this.Controls.Add(this.bar_animacion);
             this.Controls.Add(this.btn_Click);
             this.Name = "Form1";
@@ -76,6 +87,7 @@
 
         private System.Windows.Forms.Button btn_Click;
         private System.Windows.Forms.ProgressBar bar_animacion;
+        private System.Windows.Forms.Label lbl_txt_1;
     }
 }
 

@@ -21,8 +21,10 @@ namespace UI
         {
             do
             {
-                bar_animacion.Value = bar_animacion.Value+ 5;
+                bar_animacion.Value = bar_animacion.Value+1;
             } while (this.bar_animacion.Value < 100);
+            Form frm1 = new Form2();
+            frm1.ShowDialog();
         }
     }
 }
