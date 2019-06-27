@@ -12,7 +12,7 @@ namespace UI
 {
     public partial class Form2 : Form
     {
-        int flagHorizontal = 0;
+        int flagHorizontal = 1;
         int flagVertical = 0;
         int movimiento = 1;
         private int direccion;
@@ -28,10 +28,12 @@ namespace UI
 
         private void LblNegro_Click(object sender, EventArgs e)
         {
+            lblInformacion.Visible = false;
             lblNegro.ImageIndex = 0;
             int contador = 0;
             while (contador <= 700)
             {
+                
                 contador++;
                 switch (contador)
                 {
@@ -54,30 +56,51 @@ namespace UI
                         lblNegro.ImageIndex = 6;
                         break;
                     case 700:
-                        flagHorizontal = lblNegro.Left;
-                        controlLimites(flagHorizontal,0);
+                        //flagHorizontal = lblNegro.Left;
+                        //controlLimites(flagHorizontal,0);
                         lblNegro.ImageIndex = 7;
                         lblNegro.Left = lblNegro.Left - 20;
+                        if (lblNegro.Left + lblNegro.Width < pnEscenario.Width && flagHorizontal==1)
+                        {
+                            lblNegro.Left = lblNegro.Left + movimiento;
+                        }
+                        else
+                        {
+                            flagHorizontal = -1;
+                            lblNegro.Left = lblNegro.Left - movimiento;
+                        }
+                        //if (lblNegro.Left <= 0)
+                        //{
+                        //    flagHorizontal = 1;
+                        //}
                         contador = 0;
                         break;
                 }
                 this.Refresh();
 
-            }
+            } 
 
         }
 
-        private void controlLimites(int flagHorizontal, int flagVertical)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (flagHorizontal < 1)
-            {
-                direccion = 1;
-            }
-            else
-            {
-                direccion = -1;
-            }
+            Timer relojito = new Timer();
+            relojito.Interval = 500;
+            relojito.Tick += new EventHandler(LblNegro_Click);
+            relojito.Start();
         }
+
+        //private void controlLimites(int flagHorizontal, int flagVertical)
+        //{
+        //    if (flagHorizontal < 1)
+        //    {
+        //        direccion = 1;
+        //    }
+        //    else
+        //    {
+        //        direccion = -1;
+        //    }
+        //}
     }
 }
 //    public void controlLimites(int l)
