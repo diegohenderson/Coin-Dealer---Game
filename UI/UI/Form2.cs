@@ -41,6 +41,18 @@ namespace UI
                     case 200:
                         lblNegro.ImageIndex = 2;
                         break;
+                    case 300:
+                        lblNegro.ImageIndex = 3;
+                        break;
+                    case 400:
+                        lblNegro.ImageIndex= 4;
+                        break;
+                    case 500:
+                        lblNegro.ImageIndex = 5;
+                        break;
+                    case 600:
+                        lblNegro.ImageIndex = 6;
+                        break;
                     case 700:
                         flagHorizontal = lblNegro.Left;
                         controlLimites(flagHorizontal,0);
