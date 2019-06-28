@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI
 {
+    public enum Gamestate { Jugando, Detenido, Finalizado };
     public partial class Form2 : Form
     {
         int flagHorizontal = 1;
         int flagVertical = 0;
-        int movimiento = 1;
+        int movimiento = 10;
         private int direccion;
-
+        Timer relojito = new Timer();
+        Timer RelojAnimacionLeft = new Timer();
+        public Gamestate EstadoJuego = Gamestate.Detenido;
         public Form2()
         {
             InitializeComponent();
@@ -24,85 +20,146 @@ namespace UI
 
         private void Form2_Load(object sender, EventArgs e)
         {
-        }
 
+        }
+        private void Movimiento()
+        {
+            if (EstadoJuego == Gamestate.Detenido)
+            {
+
+            }
+        }
+        private void PnEscenario_Paint(object sender, PaintEventArgs e)
+        {
+        }
         private void LblNegro_Click(object sender, EventArgs e)
         {
-            lblInformacion.Visible = false;
-            lblNegro.ImageIndex = 0;
-            int contador = 0;
-            while (contador <= 700)
-            {
-                
-                contador++;
-                switch (contador)
-                {
-                    case 100:
-                        lblNegro.ImageIndex = 1;
-                        break;
-                    case 200:
-                        lblNegro.ImageIndex = 2;
-                        break;
-                    case 300:
-                        lblNegro.ImageIndex = 3;
-                        break;
-                    case 400:
-                        lblNegro.ImageIndex= 4;
-                        break;
-                    case 500:
-                        lblNegro.ImageIndex = 5;
-                        break;
-                    case 600:
-                        lblNegro.ImageIndex = 6;
-                        break;
-                    case 700:
-                        //flagHorizontal = lblNegro.Left;
-                        //controlLimites(flagHorizontal,0);
-                        lblNegro.ImageIndex = 7;
-                        lblNegro.Left = lblNegro.Left - 20;
-                        if (lblNegro.Left + lblNegro.Width < pnEscenario.Width && flagHorizontal==1)
-                        {
-                            lblNegro.Left = lblNegro.Left + movimiento;
-                        }
-                        else
-                        {
-                            flagHorizontal = -1;
-                            lblNegro.Left = lblNegro.Left - movimiento;
-                        }
-                        //if (lblNegro.Left <= 0)
-                        //{
-                        //    flagHorizontal = 1;
-                        //}
-                        contador = 0;
-                        break;
-                }
-                this.Refresh();
-
-            } 
-
-        }
-
-        private void Timer1_Tick(object sender, EventArgs e)
-        {
-            Timer relojito = new Timer();
-            relojito.Interval = 500;
-            relojito.Tick += new EventHandler(LblNegro_Click);
+            relojito.Interval = 50000;
             relojito.Start();
+            relojito.Tick += new EventHandler(MovimientoPersonaje);
+
         }
 
-        //private void controlLimites(int flagHorizontal, int flagVertical)
-        //{
-        //    if (flagHorizontal < 1)
-        //    {
-        //        direccion = 1;
-        //    }
-        //    else
-        //    {
-        //        direccion = -1;
-        //    }
-        //}
+        public void MovimientoPersonaje(object sender, EventArgs e)
+        {
+            //lblNegro.ImageIndex = 0;
+            //if (lblNegro.Left + lblNegro.Width < pnEscenario.Width && flagHorizontal == 1)
+            //{
+            //    lblNegro.Left = lblNegro.Left + movimiento;
+            //}
+            //else
+            //{
+            //    flagHorizontal = -1;
+            //    lblNegro.Left = lblNegro.Left - movimiento;
+            //}
+            //if (lblNegro.Left <= 0)
+            //{
+            //    flagHorizontal = 1;
+            //}
+            //if (lblNegro.Left > pnEscenario.Size.Width && flagHorizontal == 0)
+            //{
+            //    lblNegro.Left = lblNegro.Left - movimiento;
+            //}
+
+
+
+
+            ///////////
+            //if (lblNegro.Left < pnEscenario.Size.Width && flagHorizontal == 1)
+            //{
+            //    lblNegro.Left = lblNegro.Left + movimiento;
+            //}
+            //else
+            //{
+            //    flagHorizontal = -1;
+            //    lblNegro.Left = lblNegro.Left - movimiento;
+            //    if (lblNegro.Left <= 0)
+            //    {
+            //        flagHorizontal = 1;
+            //    }
+            //}
+        }
+
+
+
+
+        private void Form2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (EstadoJuego == Gamestate.Detenido)
+            {
+                //lblNegro.ImageIndex = 0;
+                if (e.KeyCode == Keys.Space)
+                {
+                    EstadoJuego = Gamestate.Jugando;
+                    lblInformacion.Visible = false;
+                }
+            }
+            else if (EstadoJuego == Gamestate.Jugando)
+            {
+                if (e.KeyCode == Keys.Left)
+                {
+                    lblNegro.Left = lblNegro.Left - 50;
+                    RelojAnimacionLeft.Interval = 1;
+                    RelojAnimacionLeft.Start();
+                    RelojAnimacionLeft.Tick += new EventHandler(Animacion);
+
+                }
+                if (e.KeyCode == Keys.Right)
+                {
+                    lblNegro.Left = lblNegro.Left + 50;
+                    RelojAnimacionLeft.Stop();
+                }
+                if (e.KeyCode == Keys.Up)
+                {
+                    lblNegro.Top = lblNegro.Top - 50;
+                    RelojAnimacionLeft.Stop();
+
+                }
+                if (e.KeyCode == Keys.Down)
+                {
+                    lblNegro.Top = lblNegro.Top + 50;
+                    RelojAnimacionLeft.Stop();
+                }
+
+            }
+
+        }
+
+        private void TimerAnimacion_Tick(object sender, EventArgs e)
+        {
+
+        }
+        public void Animacion(object sender, EventArgs e)
+        {
+            if (lblNegro.ImageIndex < 7)
+            {
+                lblNegro.ImageIndex = lblNegro.ImageIndex + 1;
+            }
+            else
+            {
+                lblNegro.ImageIndex = 1;
+            }
+        }
     }
 }
+
+
+//private void controlLimites(int flagHorizontal, int flagVertical)
+//{
+//    if (flagHorizontal < 1)
+//    {
+//        direccion = 1;
+//    }
+//    else
+//    {
+//        direccion = -1;
+//    }
+//}
+
 //    public void controlLimites(int l)
 //    {
 //        if (lblNegro.Left < panel1.Size.Width && flagH == 1)
@@ -119,10 +176,7 @@ namespace UI
 //            {
 //                flagH = 1;
 //            }
-//            //if (label1.Left > panel1.Size.Width && flagH == 0)
-//            //{
-//            //    label1.Left = label1.Left - paso;
-//            //}
+
 
 
 //        }
