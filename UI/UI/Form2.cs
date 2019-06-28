@@ -12,6 +12,7 @@ namespace UI
         private int direccion;
         Timer relojito = new Timer();
         Timer RelojAnimacionLeft = new Timer();
+        Timer RelojMoneda = new Timer();
         public Gamestate EstadoJuego = Gamestate.Detenido;
         public Form2()
         {
@@ -21,13 +22,6 @@ namespace UI
         private void Form2_Load(object sender, EventArgs e)
         {
 
-        }
-        private void Movimiento()
-        {
-            if (EstadoJuego == Gamestate.Detenido)
-            {
-
-            }
         }
         private void PnEscenario_Paint(object sender, PaintEventArgs e)
         {
@@ -95,6 +89,7 @@ namespace UI
                 if (e.KeyCode == Keys.Space)
                 {
                     EstadoJuego = Gamestate.Jugando;
+                    RelojAnimacionMoneda();
                     lblInformacion.Visible = false;
                 }
             }
@@ -103,10 +98,8 @@ namespace UI
                 if (e.KeyCode == Keys.Left)
                 {
                     lblNegro.Left = lblNegro.Left - 50;
-                    RelojAnimacionLeft.Interval = 1;
-                    RelojAnimacionLeft.Start();
-                    RelojAnimacionLeft.Tick += new EventHandler(Animacion);
-
+                    
+                    RelojAnimacionNegroLeft();
                 }
                 if (e.KeyCode == Keys.Right)
                 {
@@ -133,7 +126,20 @@ namespace UI
         {
 
         }
-        public void Animacion(object sender, EventArgs e)
+        public void RelojAnimacionMoneda()
+        {
+            RelojMoneda.Interval = 500;
+            RelojMoneda.Start();
+            RelojMoneda.Tick += new EventHandler(AnimacionMoneda);
+
+        }
+        public void RelojAnimacionNegroLeft()
+        {
+            RelojAnimacionLeft.Interval = 500;
+            RelojAnimacionLeft.Start();
+            RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
+        }
+        public void AnimacionNegro(object sender, EventArgs e)
         {
             if (lblNegro.ImageIndex < 7)
             {
@@ -142,6 +148,17 @@ namespace UI
             else
             {
                 lblNegro.ImageIndex = 1;
+            }
+        }
+        public void AnimacionMoneda(object sender, EventArgs e)
+        {
+            if (lblMoneda.ImageIndex < 6)
+            {
+                lblMoneda.ImageIndex = lblMoneda.ImageIndex + 1;
+            }
+            else
+            {
+                lblMoneda.ImageIndex = 1;
             }
         }
     }
