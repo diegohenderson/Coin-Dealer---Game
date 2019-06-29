@@ -83,8 +83,10 @@ namespace UI
 
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
+            
             if (EstadoJuego == Gamestate.Detenido)
             {
+                
                 //lblNegro.ImageIndex = 0;
                 if (e.KeyCode == Keys.Space)
                 {
@@ -97,14 +99,21 @@ namespace UI
             {
                 if (e.KeyCode == Keys.Left)
                 {
-                    lblNegro.Left = lblNegro.Left - 50;
-                    
-                    RelojAnimacionNegroLeft();
+                    if (lblNegro.Location.X > 0)
+                    {
+                        lblNegro.Left = lblNegro.Left - 50;
+                        RelojAnimacionNegroLeft();
+
+                    }
                 }
                 if (e.KeyCode == Keys.Right)
                 {
-                    lblNegro.Left = lblNegro.Left + 50;
-                    RelojAnimacionLeft.Stop();
+                    if (lblNegro.Location.X < 596)
+                    {
+                        lblNegro.Left = lblNegro.Left + 50;
+                        RelojAnimacionLeft.Stop();
+
+                    }
                 }
                 if (e.KeyCode == Keys.Up)
                 {
@@ -135,9 +144,10 @@ namespace UI
         }
         public void RelojAnimacionNegroLeft()
         {
-            RelojAnimacionLeft.Interval = 500;
+            RelojAnimacionLeft.Interval = 50;
             RelojAnimacionLeft.Start();
             RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
+
         }
         public void AnimacionNegro(object sender, EventArgs e)
         {
@@ -152,14 +162,77 @@ namespace UI
         }
         public void AnimacionMoneda(object sender, EventArgs e)
         {
-            if (lblMoneda.ImageIndex < 6)
+            if (lblMoneda1.ImageIndex < 6 && lblMoneda2.ImageIndex < 6 && lblMoneda3.ImageIndex < 6 && lblMoneda4.ImageIndex < 6 && lblMoneda5.ImageIndex < 6)
             {
-                lblMoneda.ImageIndex = lblMoneda.ImageIndex + 1;
+                lblMoneda1.ImageIndex = lblMoneda1.ImageIndex + 2;
+                lblMoneda2.ImageIndex = lblMoneda2.ImageIndex + 2;
+                lblMoneda3.ImageIndex = lblMoneda3.ImageIndex + 2;
+                lblMoneda4.ImageIndex = lblMoneda4.ImageIndex + 2;
+                lblMoneda5.ImageIndex = lblMoneda5.ImageIndex + 2;
             }
             else
             {
-                lblMoneda.ImageIndex = 1;
+                lblMoneda1.ImageIndex = 1;
+                lblMoneda2.ImageIndex = 1;
+                lblMoneda3.ImageIndex = 1;
+                lblMoneda4.ImageIndex = 1;
+                lblMoneda5.ImageIndex = 1;
             }
+        }
+        /// <summary>
+        /// Timer para Monedas con su Timer Correspondiente
+        /// 
+        /// </summary>
+        /// <param lblMoneda1="sender"></param>
+        /// <param TimerMoneda1_Tick="e"></param>
+        private void TimerMoneda1_Tick(object sender, EventArgs e)
+        {
+            lblMoneda1.Left = lblMoneda1.Left + 1;
+            if (lblMoneda1.Left >= pnEscenario.Width)
+            {
+                lblMoneda1.Left = lblMoneda1.Left - lblMoneda1.Right;
+            }
+        }
+
+        private void TimerMoneda2_Tick(object sender, EventArgs e)
+        {
+            lblMoneda2.Left = lblMoneda2.Left + 2;
+            if (lblMoneda2.Left >= pnEscenario.Width)
+            {
+                lblMoneda2.Left = lblMoneda2.Left - lblMoneda2.Right;
+            }
+
+        }
+
+        private void TimerMoneda3_Tick(object sender, EventArgs e)
+        {
+            lblMoneda3.Left = lblMoneda3.Left + 3;
+            if (lblMoneda3.Left >= pnEscenario.Width)
+            {
+                lblMoneda3.Left =  lblMoneda3.Left- lblMoneda3.Right;
+            }
+
+        }
+
+        private void TimerMoneda4_Tick(object sender, EventArgs e)
+        {
+            lblMoneda4.Left = lblMoneda4.Left + 4;
+            if (lblMoneda4.Left >= pnEscenario.Width)
+            {
+                lblMoneda4.Left = lblMoneda4.Left - lblMoneda4.Right;
+            }
+
+        }
+
+        private void TimerMoneda5_Tick(object sender, EventArgs e)
+        {
+            lblMoneda5.Left = lblMoneda5.Left + 5;
+            if (lblMoneda5.Left >= pnEscenario.Width)
+            {
+                Random posicionaleatoria = new Random();
+                lblMoneda5.Left = lblMoneda5.Left - ((posicionaleatoria.Next(0,600)) + lblMoneda5.Right) ; 
+            }
+
         }
     }
 }

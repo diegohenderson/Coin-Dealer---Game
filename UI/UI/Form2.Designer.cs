@@ -31,28 +31,52 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.pnEscenario = new System.Windows.Forms.Panel();
-            this.lblInformacion = new System.Windows.Forms.Label();
-            this.lblNegro = new System.Windows.Forms.Label();
-            this.imageListNegro = new System.Windows.Forms.ImageList(this.components);
-            this.lblMoneda = new System.Windows.Forms.Label();
             this.imageListMoneda = new System.Windows.Forms.ImageList(this.components);
+            this.lblInformacion = new System.Windows.Forms.Label();
+            this.imageListNegro = new System.Windows.Forms.ImageList(this.components);
+            this.lblMoneda2 = new System.Windows.Forms.Label();
+            this.lblMoneda3 = new System.Windows.Forms.Label();
+            this.lblMoneda4 = new System.Windows.Forms.Label();
+            this.lblMoneda5 = new System.Windows.Forms.Label();
+            this.timerMoneda1 = new System.Windows.Forms.Timer(this.components);
+            this.timerMoneda2 = new System.Windows.Forms.Timer(this.components);
+            this.timerMoneda3 = new System.Windows.Forms.Timer(this.components);
+            this.timerMoneda4 = new System.Windows.Forms.Timer(this.components);
+            this.timerMoneda5 = new System.Windows.Forms.Timer(this.components);
+            this.lblMoneda1 = new System.Windows.Forms.Label();
+            this.lblNegro = new System.Windows.Forms.Label();
             this.pnEscenario.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnEscenario
             // 
-            this.pnEscenario.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.pnEscenario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnEscenario.BackgroundImage")));
+            this.pnEscenario.BackColor = System.Drawing.Color.Turquoise;
             this.pnEscenario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pnEscenario.Controls.Add(this.lblMoneda);
+            this.pnEscenario.Controls.Add(this.lblMoneda5);
+            this.pnEscenario.Controls.Add(this.lblMoneda4);
+            this.pnEscenario.Controls.Add(this.lblMoneda3);
+            this.pnEscenario.Controls.Add(this.lblMoneda2);
+            this.pnEscenario.Controls.Add(this.lblMoneda1);
             this.pnEscenario.Controls.Add(this.lblInformacion);
             this.pnEscenario.Controls.Add(this.lblNegro);
-            this.pnEscenario.Location = new System.Drawing.Point(-6, 3);
+            this.pnEscenario.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnEscenario.Location = new System.Drawing.Point(0, 0);
             this.pnEscenario.Name = "pnEscenario";
-            this.pnEscenario.Size = new System.Drawing.Size(711, 411);
+            this.pnEscenario.Size = new System.Drawing.Size(719, 432);
             this.pnEscenario.TabIndex = 0;
             this.pnEscenario.Tag = "Panel";
             this.pnEscenario.Paint += new System.Windows.Forms.PaintEventHandler(this.PnEscenario_Paint);
+            // 
+            // imageListMoneda
+            // 
+            this.imageListMoneda.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListMoneda.ImageStream")));
+            this.imageListMoneda.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListMoneda.Images.SetKeyName(0, "star coin 1.png");
+            this.imageListMoneda.Images.SetKeyName(1, "star coin rotate 2.png");
+            this.imageListMoneda.Images.SetKeyName(2, "star coin rotate 3.png");
+            this.imageListMoneda.Images.SetKeyName(3, "star coin rotate 4.png");
+            this.imageListMoneda.Images.SetKeyName(4, "star coin rotate 5.png");
+            this.imageListMoneda.Images.SetKeyName(5, "star coin rotate 6.png");
             // 
             // lblInformacion
             // 
@@ -68,17 +92,6 @@
             this.lblInformacion.TabIndex = 1;
             this.lblInformacion.Text = "Presiona Flecha arriba para jugar";
             // 
-            // lblNegro
-            // 
-            this.lblNegro.BackColor = System.Drawing.Color.Transparent;
-            this.lblNegro.ImageIndex = 0;
-            this.lblNegro.ImageList = this.imageListNegro;
-            this.lblNegro.Location = new System.Drawing.Point(605, 239);
-            this.lblNegro.Name = "lblNegro";
-            this.lblNegro.Size = new System.Drawing.Size(112, 161);
-            this.lblNegro.TabIndex = 0;
-            this.lblNegro.Click += new System.EventHandler(this.LblNegro_Click);
-            // 
             // imageListNegro
             // 
             this.imageListNegro.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListNegro.ImageStream")));
@@ -92,33 +105,104 @@
             this.imageListNegro.Images.SetKeyName(6, "0006.png");
             this.imageListNegro.Images.SetKeyName(7, "0007.png");
             // 
-            // lblMoneda
+            // lblMoneda2
             // 
-            this.lblMoneda.BackColor = System.Drawing.Color.Transparent;
-            this.lblMoneda.ImageIndex = 0;
-            this.lblMoneda.ImageList = this.imageListMoneda;
-            this.lblMoneda.Location = new System.Drawing.Point(150, 223);
-            this.lblMoneda.Name = "lblMoneda";
-            this.lblMoneda.Size = new System.Drawing.Size(95, 56);
-            this.lblMoneda.TabIndex = 2;
+            this.lblMoneda2.BackColor = System.Drawing.Color.Transparent;
+            this.lblMoneda2.ImageIndex = 0;
+            this.lblMoneda2.ImageList = this.imageListMoneda;
+            this.lblMoneda2.Location = new System.Drawing.Point(173, 241);
+            this.lblMoneda2.Name = "lblMoneda2";
+            this.lblMoneda2.Size = new System.Drawing.Size(62, 66);
+            this.lblMoneda2.TabIndex = 3;
             // 
-            // imageListMoneda
+            // lblMoneda3
             // 
-            this.imageListMoneda.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListMoneda.ImageStream")));
-            this.imageListMoneda.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListMoneda.Images.SetKeyName(0, "star coin rotate 1.png");
-            this.imageListMoneda.Images.SetKeyName(1, "star coin rotate 2.png");
-            this.imageListMoneda.Images.SetKeyName(2, "star coin rotate 3.png");
-            this.imageListMoneda.Images.SetKeyName(3, "star coin rotate 4.png");
-            this.imageListMoneda.Images.SetKeyName(4, "star coin rotate 5.png");
-            this.imageListMoneda.Images.SetKeyName(5, "star coin rotate 6.png");
+            this.lblMoneda3.BackColor = System.Drawing.Color.Transparent;
+            this.lblMoneda3.ImageIndex = 0;
+            this.lblMoneda3.ImageList = this.imageListMoneda;
+            this.lblMoneda3.Location = new System.Drawing.Point(298, 239);
+            this.lblMoneda3.Name = "lblMoneda3";
+            this.lblMoneda3.Size = new System.Drawing.Size(62, 67);
+            this.lblMoneda3.TabIndex = 4;
+            // 
+            // lblMoneda4
+            // 
+            this.lblMoneda4.BackColor = System.Drawing.Color.Transparent;
+            this.lblMoneda4.ImageIndex = 0;
+            this.lblMoneda4.ImageList = this.imageListMoneda;
+            this.lblMoneda4.Location = new System.Drawing.Point(418, 250);
+            this.lblMoneda4.Name = "lblMoneda4";
+            this.lblMoneda4.Size = new System.Drawing.Size(63, 57);
+            this.lblMoneda4.TabIndex = 5;
+            // 
+            // lblMoneda5
+            // 
+            this.lblMoneda5.BackColor = System.Drawing.Color.Transparent;
+            this.lblMoneda5.ImageIndex = 0;
+            this.lblMoneda5.ImageList = this.imageListMoneda;
+            this.lblMoneda5.Location = new System.Drawing.Point(547, 239);
+            this.lblMoneda5.Name = "lblMoneda5";
+            this.lblMoneda5.Size = new System.Drawing.Size(74, 68);
+            this.lblMoneda5.TabIndex = 6;
+            // 
+            // timerMoneda1
+            // 
+            this.timerMoneda1.Enabled = true;
+            this.timerMoneda1.Interval = 10;
+            this.timerMoneda1.Tick += new System.EventHandler(this.TimerMoneda1_Tick);
+            // 
+            // timerMoneda2
+            // 
+            this.timerMoneda2.Enabled = true;
+            this.timerMoneda2.Interval = 25;
+            this.timerMoneda2.Tick += new System.EventHandler(this.TimerMoneda2_Tick);
+            // 
+            // timerMoneda3
+            // 
+            this.timerMoneda3.Enabled = true;
+            this.timerMoneda3.Interval = 30;
+            this.timerMoneda3.Tick += new System.EventHandler(this.TimerMoneda3_Tick);
+            // 
+            // timerMoneda4
+            // 
+            this.timerMoneda4.Enabled = true;
+            this.timerMoneda4.Interval = 50;
+            this.timerMoneda4.Tick += new System.EventHandler(this.TimerMoneda4_Tick);
+            // 
+            // timerMoneda5
+            // 
+            this.timerMoneda5.Enabled = true;
+            this.timerMoneda5.Interval = 150;
+            this.timerMoneda5.Tick += new System.EventHandler(this.TimerMoneda5_Tick);
+            // 
+            // lblMoneda1
+            // 
+            this.lblMoneda1.BackColor = System.Drawing.Color.Transparent;
+            this.lblMoneda1.ImageIndex = 0;
+            this.lblMoneda1.ImageList = this.imageListMoneda;
+            this.lblMoneda1.Location = new System.Drawing.Point(27, 309);
+            this.lblMoneda1.Name = "lblMoneda1";
+            this.lblMoneda1.Size = new System.Drawing.Size(100, 57);
+            this.lblMoneda1.TabIndex = 2;
+            // 
+            // lblNegro
+            // 
+            this.lblNegro.BackColor = System.Drawing.Color.Transparent;
+            this.lblNegro.ImageIndex = 0;
+            this.lblNegro.ImageList = this.imageListNegro;
+            this.lblNegro.Location = new System.Drawing.Point(341, 250);
+            this.lblNegro.Name = "lblNegro";
+            this.lblNegro.Size = new System.Drawing.Size(112, 161);
+            this.lblNegro.TabIndex = 1;
+            this.lblNegro.Click += new System.EventHandler(this.LblNegro_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(702, 408);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(719, 432);
             this.Controls.Add(this.pnEscenario);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -135,7 +219,16 @@
         private System.Windows.Forms.Label lblNegro;
         private System.Windows.Forms.ImageList imageListNegro;
         private System.Windows.Forms.Label lblInformacion;
-        private System.Windows.Forms.Label lblMoneda;
         private System.Windows.Forms.ImageList imageListMoneda;
+        private System.Windows.Forms.Label lblMoneda5;
+        private System.Windows.Forms.Label lblMoneda4;
+        private System.Windows.Forms.Label lblMoneda3;
+        private System.Windows.Forms.Label lblMoneda2;
+        private System.Windows.Forms.Label lblMoneda1;
+        private System.Windows.Forms.Timer timerMoneda1;
+        private System.Windows.Forms.Timer timerMoneda2;
+        private System.Windows.Forms.Timer timerMoneda3;
+        private System.Windows.Forms.Timer timerMoneda4;
+        private System.Windows.Forms.Timer timerMoneda5;
     }
 }
