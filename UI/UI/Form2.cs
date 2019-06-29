@@ -6,11 +6,6 @@ namespace UI
     public enum Gamestate { Jugando, Detenido, Finalizado };
     public partial class Form2 : Form
     {
-        int flagHorizontal = 1;
-        int flagVertical = 0;
-        int movimiento = 10;
-        private int direccion;
-        Timer relojito = new Timer();
         Timer RelojAnimacionLeft = new Timer();
         Timer RelojMoneda = new Timer();
         public Gamestate EstadoJuego = Gamestate.Detenido;
@@ -23,80 +18,24 @@ namespace UI
         {
 
         }
-        private void PnEscenario_Paint(object sender, PaintEventArgs e)
-        {
-        }
-        private void LblNegro_Click(object sender, EventArgs e)
-        {
-            relojito.Interval = 50000;
-            relojito.Start();
-            relojito.Tick += new EventHandler(MovimientoPersonaje);
-
-        }
-
-        public void MovimientoPersonaje(object sender, EventArgs e)
-        {
-            //lblNegro.ImageIndex = 0;
-            //if (lblNegro.Left + lblNegro.Width < pnEscenario.Width && flagHorizontal == 1)
-            //{
-            //    lblNegro.Left = lblNegro.Left + movimiento;
-            //}
-            //else
-            //{
-            //    flagHorizontal = -1;
-            //    lblNegro.Left = lblNegro.Left - movimiento;
-            //}
-            //if (lblNegro.Left <= 0)
-            //{
-            //    flagHorizontal = 1;
-            //}
-            //if (lblNegro.Left > pnEscenario.Size.Width && flagHorizontal == 0)
-            //{
-            //    lblNegro.Left = lblNegro.Left - movimiento;
-            //}
-
-
-
-
-            ///////////
-            //if (lblNegro.Left < pnEscenario.Size.Width && flagHorizontal == 1)
-            //{
-            //    lblNegro.Left = lblNegro.Left + movimiento;
-            //}
-            //else
-            //{
-            //    flagHorizontal = -1;
-            //    lblNegro.Left = lblNegro.Left - movimiento;
-            //    if (lblNegro.Left <= 0)
-            //    {
-            //        flagHorizontal = 1;
-            //    }
-            //}
-        }
-
-
-
-
-        private void Form2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
             if (EstadoJuego == Gamestate.Detenido)
             {
-                
+
                 //lblNegro.ImageIndex = 0;
                 if (e.KeyCode == Keys.Space)
                 {
                     EstadoJuego = Gamestate.Jugando;
                     RelojAnimacionMoneda();
                     lblInformacion.Visible = false;
+                    
                 }
             }
             else if (EstadoJuego == Gamestate.Jugando)
             {
+                AgarrandoMonedas();
                 if (e.KeyCode == Keys.Left)
                 {
                     if (lblNegro.Location.X > 0)
@@ -130,11 +69,40 @@ namespace UI
             }
 
         }
-
-        private void TimerAnimacion_Tick(object sender, EventArgs e)
+        public void AgarrandoMonedas()
         {
-
+            int contadormonedas1 = 0;
+            int contadormonedas2 = 0;
+            int contadormonedas3 = 0;
+            int contadormonedas4 = 0;
+            int contadormonedas5 = 0;
+            int totalmonedas = 0;
+            if (lblNegro.Bounds.IntersectsWith(lblMoneda1.Bounds))
+            {
+                
+                contadormonedas1++;
+            }
+            else if (lblNegro.Bounds.IntersectsWith(lblMoneda2.Bounds))
+            {
+                contadormonedas2++;
+            }
+            else if (lblNegro.Bounds.IntersectsWith(lblMoneda3.Bounds))
+            {
+                contadormonedas3++;
+            }
+            else if (lblNegro.Bounds.IntersectsWith(lblMoneda4.Bounds))
+            {
+                contadormonedas4++;
+            }
+            else if (lblNegro.Bounds.IntersectsWith(lblMoneda5.Bounds))
+            {
+                contadormonedas5++;
+            }
+            totalmonedas = contadormonedas1 + contadormonedas2 + contadormonedas3 + contadormonedas4 + contadormonedas5;
+            lblScore.Text = totalmonedas.ToString();
         }
+
+
         public void RelojAnimacionMoneda()
         {
             RelojMoneda.Interval = 500;
@@ -160,15 +128,20 @@ namespace UI
                 lblNegro.ImageIndex = 1;
             }
         }
+        /// <summary>
+        /// Animacion para las Monedas, Mostrando una nueva imagen de el list en cada intervalo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AnimacionMoneda(object sender, EventArgs e)
         {
             if (lblMoneda1.ImageIndex < 6 && lblMoneda2.ImageIndex < 6 && lblMoneda3.ImageIndex < 6 && lblMoneda4.ImageIndex < 6 && lblMoneda5.ImageIndex < 6)
             {
-                lblMoneda1.ImageIndex = lblMoneda1.ImageIndex + 2;
-                lblMoneda2.ImageIndex = lblMoneda2.ImageIndex + 2;
-                lblMoneda3.ImageIndex = lblMoneda3.ImageIndex + 2;
-                lblMoneda4.ImageIndex = lblMoneda4.ImageIndex + 2;
-                lblMoneda5.ImageIndex = lblMoneda5.ImageIndex + 2;
+                lblMoneda1.ImageIndex = lblMoneda1.ImageIndex + 1;
+                lblMoneda2.ImageIndex = lblMoneda2.ImageIndex + 1;
+                lblMoneda3.ImageIndex = lblMoneda3.ImageIndex + 1;
+                lblMoneda4.ImageIndex = lblMoneda4.ImageIndex + 1;
+                lblMoneda5.ImageIndex = lblMoneda5.ImageIndex + 1;
             }
             else
             {
@@ -209,7 +182,7 @@ namespace UI
             lblMoneda3.Left = lblMoneda3.Left + 3;
             if (lblMoneda3.Left >= pnEscenario.Width)
             {
-                lblMoneda3.Left =  lblMoneda3.Left- lblMoneda3.Right;
+                lblMoneda3.Left = lblMoneda3.Left - lblMoneda3.Right;
             }
 
         }
@@ -230,7 +203,7 @@ namespace UI
             if (lblMoneda5.Left >= pnEscenario.Width)
             {
                 Random posicionaleatoria = new Random();
-                lblMoneda5.Left = lblMoneda5.Left - ((posicionaleatoria.Next(0,600)) + lblMoneda5.Right) ; 
+                lblMoneda5.Left = lblMoneda5.Left - ((posicionaleatoria.Next(0, 600)) + lblMoneda5.Right);
             }
 
         }
