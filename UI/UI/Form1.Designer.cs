@@ -77,6 +77,7 @@
             this.Controls.Add(this.lbl_txt_1);
             this.Controls.Add(this.bar_animacion);
             this.Controls.Add(this.btn_Click);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

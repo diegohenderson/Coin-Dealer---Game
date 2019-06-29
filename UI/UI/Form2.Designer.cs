@@ -71,10 +71,12 @@
             // lblScore
             // 
             this.lblScore.BackColor = System.Drawing.Color.Violet;
-            this.lblScore.Location = new System.Drawing.Point(667, 13);
+            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.Location = new System.Drawing.Point(660, 13);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(50, 50);
             this.lblScore.TabIndex = 7;
+            this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblMoneda5
             // 
@@ -140,16 +142,18 @@
             // lblInformacion
             // 
             this.lblInformacion.BackColor = System.Drawing.Color.Transparent;
+            this.lblInformacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformacion.Enabled = false;
             this.lblInformacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInformacion.Font = new System.Drawing.Font("Microsoft Tai Le", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformacion.ForeColor = System.Drawing.Color.Black;
             this.lblInformacion.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblInformacion.Location = new System.Drawing.Point(269, 13);
+            this.lblInformacion.Location = new System.Drawing.Point(253, 13);
             this.lblInformacion.Name = "lblInformacion";
-            this.lblInformacion.Size = new System.Drawing.Size(364, 83);
+            this.lblInformacion.Size = new System.Drawing.Size(380, 88);
             this.lblInformacion.TabIndex = 1;
-            this.lblInformacion.Text = "Presiona Flecha arriba para jugar";
+            this.lblInformacion.Text = "Press Bar \'-\' to PLAY";
+            this.lblInformacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblNegro
             // 
@@ -213,7 +217,7 @@
             this.ClientSize = new System.Drawing.Size(912, 575);
             this.Controls.Add(this.pnEscenario);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Juego";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
             this.pnEscenario.ResumeLayout(false);
