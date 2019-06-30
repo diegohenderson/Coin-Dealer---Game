@@ -7,6 +7,7 @@ namespace UI
     public partial class Form2 : Form
     {
         Timer RelojAnimacionLeft = new Timer();
+        Timer RelojAnimacionRight = new Timer();
         Timer RelojMoneda = new Timer();
         public Gamestate EstadoJuego = Gamestate.Detenido;
         public Form2()
@@ -47,7 +48,7 @@ namespace UI
                 }
                 if (e.KeyCode == Keys.Right)
                 {
-                    if (lblNegro.Location.X < 596)
+                    if (lblNegro.Location.X < 779)
                     {
                         lblNegro.Left = lblNegro.Left + 50;
                         RelojAnimacionLeft.Stop();
@@ -114,10 +115,27 @@ namespace UI
         {
             RelojAnimacionLeft.Interval = 50;
             RelojAnimacionLeft.Start();
-            RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
+            RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegroLeft);
 
         }
-        public void AnimacionNegro(object sender, EventArgs e)
+        public void RelojAnimacionNegroRight()
+        {
+            RelojAnimacionRight.Interval = 50;
+            RelojAnimacionRight.Start();
+            RelojAnimacionRight.Tick += new EventHandler(AnimacionNegroRight);
+        }
+        public void AnimacionNegroRight(object sender, EventArgs e)
+        {
+            //if (lblNegro.ImageIndex < 6)
+            //{
+            //    lblNegro.ImageIndex = lblNegro.ImageIndex + 1;
+            //}
+            //else
+            //{
+            //    lblNegro.ImageIndex = 1;
+            //}
+        }
+        public void AnimacionNegroLeft(object sender, EventArgs e)
         {
             if (lblNegro.ImageIndex < 7)
             {
@@ -210,49 +228,3 @@ namespace UI
     }
 }
 
-
-//private void controlLimites(int flagHorizontal, int flagVertical)
-//{
-//    if (flagHorizontal < 1)
-//    {
-//        direccion = 1;
-//    }
-//    else
-//    {
-//        direccion = -1;
-//    }
-//}
-
-//    public void controlLimites(int l)
-//    {
-//        if (lblNegro.Left < panel1.Size.Width && flagH == 1)
-//        {
-//            label1.Left = label1.Left + paso;
-
-
-//        }
-//        else
-//        {
-//            flagH = -1;
-//            label1.Left = label1.Left - paso;
-//            if (label1.Left <= 0)
-//            {
-//                flagH = 1;
-//            }
-
-
-
-//        }
-
-//    }
-//}
-/* for (int i = 0; i < 10; i++)
- {
-     contador++;
-     if (contador==10)
-     {
-         label1.Left += 1;
-         i = 0;
-     }
-
- }*/

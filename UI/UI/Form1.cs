@@ -19,12 +19,24 @@ namespace UI
 
         private void Btn_saludo_Click(object sender, EventArgs e)
         {
-            do
-            {
-                bar_animacion.Value = bar_animacion.Value+1;
-            } while (this.bar_animacion.Value < 100);
-            Form frm1 = new Form2();
-            frm1.ShowDialog();
+            
+            Form formjuego = new Form2();
+            formjuego.ShowDialog();
+            
+        }
+
+
+
+        private void BtCreditos_Click(object sender, EventArgs e)
+        {
+            Form formCreditos = new Form4();
+            formCreditos.ShowDialog();
+        }
+
+        private void Btn_Opcion_Click_1(object sender, EventArgs e)
+        {
+            Form formOpcion = new Form3();
+            formOpcion.ShowDialog();
         }
     }
 }
