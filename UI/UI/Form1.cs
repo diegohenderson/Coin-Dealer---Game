@@ -38,5 +38,29 @@ namespace UI
             Form formOpcion = new Form3();
             formOpcion.ShowDialog();
         }
+
+        private void TimerNegroIdle_Tick(object sender, EventArgs e)
+        {
+            if (lblAnimacionNegroIdle.ImageIndex < 7)
+            {
+                lblAnimacionNegroIdle.ImageIndex = lblAnimacionNegroIdle.ImageIndex + 1;
+            }
+            else
+            {
+                lblAnimacionNegroIdle.ImageIndex = 1;
+            }
+        }
+
+        private void TimerMoneda_Tick(object sender, EventArgs e)
+        {
+            if (lblMoneda.ImageIndex < 5)
+            {
+                lblMoneda.ImageIndex = lblMoneda.ImageIndex + 1;
+            }
+            else
+            {
+                lblMoneda.ImageIndex = 1;
+            }
+        }
     }
 }

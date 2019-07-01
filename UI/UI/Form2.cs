@@ -9,6 +9,7 @@ namespace UI
         Timer RelojAnimacionLeft = new Timer();
         Timer RelojAnimacionRight = new Timer();
         Timer RelojMoneda = new Timer();
+        int contadormonedas = 0;
         public Gamestate EstadoJuego = Gamestate.Detenido;
         public Form2()
         {
@@ -21,21 +22,33 @@ namespace UI
         }
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
-
+            RelojAnimacionMoneda();
+            
             if (EstadoJuego == Gamestate.Detenido)
             {
+                
 
-                //lblNegro.ImageIndex = 0;
                 if (e.KeyCode == Keys.Space)
                 {
+                    timerMoneda1.Start();
+                    timerMoneda2.Start();
+                    timerMoneda3.Start();
+                    timerMoneda4.Start();
+                    timerMoneda5.Start();
+                    lblMoneda1.Visible = true;
+                    lblMoneda2.Visible = true;
+                    lblMoneda3.Visible = true;
+                    lblMoneda4.Visible = true;
+                    lblMoneda5.Visible = true;
                     EstadoJuego = Gamestate.Jugando;
-                    RelojAnimacionMoneda();
+                    
                     lblInformacion.Visible = false;
                     
                 }
             }
             else if (EstadoJuego == Gamestate.Jugando)
             {
+                
                 AgarrandoMonedas();
                 if (e.KeyCode == Keys.Left)
                 {
@@ -66,47 +79,53 @@ namespace UI
                     lblNegro.Top = lblNegro.Top + 50;
                     RelojAnimacionLeft.Stop();
                 }
-
+                if (contadormonedas == 25) //Subo velocidad
+                {
+                    timerMoneda1.Interval = +10;
+                    timerMoneda2.Interval = +10;
+                    timerMoneda3.Interval = +10;
+                    timerMoneda4.Interval = +10;
+                    timerMoneda5.Interval = +10;
+                }
             }
 
         }
+        /// <summary>
+        /// Colision y Agarra Monedas con contador
+        /// </summary>
         public void AgarrandoMonedas()
         {
-            int contadormonedas1 = 0;
-            int contadormonedas2 = 0;
-            int contadormonedas3 = 0;
-            int contadormonedas4 = 0;
-            int contadormonedas5 = 0;
-            int totalmonedas = 0;
+            
             if (lblNegro.Bounds.IntersectsWith(lblMoneda1.Bounds))
             {
                 
-                contadormonedas1++;
+                contadormonedas++;
+                
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda2.Bounds))
             {
-                contadormonedas2++;
+                contadormonedas++;
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda3.Bounds))
             {
-                contadormonedas3++;
+                contadormonedas++;
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda4.Bounds))
             {
-                contadormonedas4++;
+                contadormonedas++;
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda5.Bounds))
             {
-                contadormonedas5++;
+                contadormonedas++;
             }
-            totalmonedas = contadormonedas1 + contadormonedas2 + contadormonedas3 + contadormonedas4 + contadormonedas5;
-            lblScore.Text = totalmonedas.ToString();
+            
+            lblScore.Text = contadormonedas.ToString();
         }
 
 
         public void RelojAnimacionMoneda()
         {
-            RelojMoneda.Interval = 500;
+            RelojMoneda.Interval = 300;
             RelojMoneda.Start();
             RelojMoneda.Tick += new EventHandler(AnimacionMoneda);
 
@@ -153,7 +172,7 @@ namespace UI
         /// <param name="e"></param>
         public void AnimacionMoneda(object sender, EventArgs e)
         {
-            if (lblMoneda1.ImageIndex < 6 && lblMoneda2.ImageIndex < 6 && lblMoneda3.ImageIndex < 6 && lblMoneda4.ImageIndex < 6 && lblMoneda5.ImageIndex < 6)
+            if (lblMoneda1.ImageIndex < 5 && lblMoneda2.ImageIndex < 5 && lblMoneda3.ImageIndex < 5 && lblMoneda4.ImageIndex < 5 && lblMoneda5.ImageIndex < 5)
             {
                 lblMoneda1.ImageIndex = lblMoneda1.ImageIndex + 1;
                 lblMoneda2.ImageIndex = lblMoneda2.ImageIndex + 1;
