@@ -17,7 +17,7 @@ namespace UI
         public Gamestate EstadoJuego = Gamestate.Detenido;
         private int posX;
         private int posY;
-        int tiempoRestante = 10;
+        int tiempoRestante = 30;
         int contadoranimacion;
         public Form2()
         {
@@ -113,7 +113,7 @@ namespace UI
             }
         }
         /// <summary>
-        /// Colision y Agarra Monedas con contador
+        /// Colision entre los lblMonedas y LblNegro, con contador
         /// </summary>
         public void AgarrandoMonedas()
         {
@@ -152,7 +152,9 @@ namespace UI
             lblScore.Text = contadormonedas.ToString();
         }
 
-
+        /// <summary>
+        /// reloj para la animacion de las monedas
+        /// </summary>
         public void RelojAnimacionMoneda()
         {
             RelojMoneda.Interval = 300;
@@ -160,6 +162,9 @@ namespace UI
             RelojMoneda.Tick += new EventHandler(AnimacionMoneda);
 
         }
+        /// <summary>
+        /// reloj para la animacion de el negro
+        /// </summary>
         public void RelojAnimacionNegro()
         {
             RelojAnimacionLeft.Interval = 500;
@@ -167,14 +172,11 @@ namespace UI
             RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
 
         }
-        
-        //public void RelojAnimacionNegroRight()
-        //{
-        //    RelojAnimacionRight.Interval = 50;
-        //    RelojAnimacionRight.Start();
-        //    RelojAnimacionRight.Tick += new EventHandler(AnimacionNegroRight);
-        //}
-
+        /// <summary>
+        /// Animacion Personaje, Responde a el metodo RelojAnimacionNegro
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void AnimacionNegro(object sender, EventArgs e)
         {
 
@@ -268,7 +270,11 @@ namespace UI
 
 
         
-
+        /// <summary>
+        /// reloj para el tiempo restante, objetivo de el juego
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void TimerTiempo_Tick(object sender, EventArgs e)
         {
             tiempoRestante = tiempoRestante - 1;
