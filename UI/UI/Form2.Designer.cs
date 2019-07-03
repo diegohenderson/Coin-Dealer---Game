@@ -32,13 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.imageListMoneda = new System.Windows.Forms.ImageList(this.components);
             this.imageListNegroLeft = new System.Windows.Forms.ImageList(this.components);
-            this.timerMoneda1 = new System.Windows.Forms.Timer(this.components);
-            this.timerMoneda2 = new System.Windows.Forms.Timer(this.components);
-            this.timerMoneda3 = new System.Windows.Forms.Timer(this.components);
-            this.timerMoneda4 = new System.Windows.Forms.Timer(this.components);
-            this.timerMoneda5 = new System.Windows.Forms.Timer(this.components);
+            this.timerMonedas = new System.Windows.Forms.Timer(this.components);
             this.imageListNegroRight = new System.Windows.Forms.ImageList(this.components);
             this.pnEscenario = new System.Windows.Forms.Panel();
+            this.lblGameOver = new System.Windows.Forms.Label();
+            this.lblTiempo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblScore = new System.Windows.Forms.Label();
             this.lblMoneda5 = new System.Windows.Forms.Label();
@@ -48,6 +46,9 @@
             this.lblMoneda1 = new System.Windows.Forms.Label();
             this.lblInformacion = new System.Windows.Forms.Label();
             this.lblNegro = new System.Windows.Forms.Label();
+            this.timerPanel = new System.Windows.Forms.Timer(this.components);
+            this.timerTiempo = new System.Windows.Forms.Timer(this.components);
+            this.timerpn = new System.Windows.Forms.Timer(this.components);
             this.pnEscenario.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,33 +73,10 @@
             this.imageListNegroLeft.Images.SetKeyName(3, "0003.png");
             this.imageListNegroLeft.Images.SetKeyName(4, "0004.png");
             this.imageListNegroLeft.Images.SetKeyName(5, "0005.png");
-            this.imageListNegroLeft.Images.SetKeyName(6, "0006.png");
-            this.imageListNegroLeft.Images.SetKeyName(7, "0007.png");
             // 
-            // timerMoneda1
+            // timerMonedas
             // 
-            this.timerMoneda1.Interval = 10;
-            this.timerMoneda1.Tick += new System.EventHandler(this.TimerMoneda1_Tick);
-            // 
-            // timerMoneda2
-            // 
-            this.timerMoneda2.Interval = 25;
-            this.timerMoneda2.Tick += new System.EventHandler(this.TimerMoneda2_Tick);
-            // 
-            // timerMoneda3
-            // 
-            this.timerMoneda3.Interval = 30;
-            this.timerMoneda3.Tick += new System.EventHandler(this.TimerMoneda3_Tick);
-            // 
-            // timerMoneda4
-            // 
-            this.timerMoneda4.Interval = 50;
-            this.timerMoneda4.Tick += new System.EventHandler(this.TimerMoneda4_Tick);
-            // 
-            // timerMoneda5
-            // 
-            this.timerMoneda5.Interval = 150;
-            this.timerMoneda5.Tick += new System.EventHandler(this.TimerMoneda5_Tick);
+            this.timerMonedas.Tick += new System.EventHandler(this.TimerMoneda1_Tick);
             // 
             // imageListNegroRight
             // 
@@ -116,6 +94,8 @@
             this.pnEscenario.BackColor = System.Drawing.Color.DimGray;
             this.pnEscenario.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnEscenario.BackgroundImage")));
             this.pnEscenario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pnEscenario.Controls.Add(this.lblGameOver);
+            this.pnEscenario.Controls.Add(this.lblTiempo);
             this.pnEscenario.Controls.Add(this.label1);
             this.pnEscenario.Controls.Add(this.lblScore);
             this.pnEscenario.Controls.Add(this.lblMoneda5);
@@ -131,6 +111,31 @@
             this.pnEscenario.TabIndex = 0;
             this.pnEscenario.Tag = "Panel";
             // 
+            // lblGameOver
+            // 
+            this.lblGameOver.BackColor = System.Drawing.Color.Transparent;
+            this.lblGameOver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblGameOver.Cursor = System.Windows.Forms.Cursors.No;
+            this.lblGameOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblGameOver.Font = new System.Drawing.Font("Ink Free", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameOver.Location = new System.Drawing.Point(275, 92);
+            this.lblGameOver.Name = "lblGameOver";
+            this.lblGameOver.Size = new System.Drawing.Size(274, 154);
+            this.lblGameOver.TabIndex = 10;
+            this.lblGameOver.Text = "GameOver";
+            this.lblGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblGameOver.Visible = false;
+            // 
+            // lblTiempo
+            // 
+            this.lblTiempo.BackColor = System.Drawing.Color.Transparent;
+            this.lblTiempo.Font = new System.Drawing.Font("Ink Free", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTiempo.Location = new System.Drawing.Point(210, 80);
+            this.lblTiempo.Name = "lblTiempo";
+            this.lblTiempo.Size = new System.Drawing.Size(339, 50);
+            this.lblTiempo.TabIndex = 9;
+            this.lblTiempo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -144,9 +149,9 @@
             this.lblScore.BackColor = System.Drawing.Color.Transparent;
             this.lblScore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblScore.Font = new System.Drawing.Font("Ink Free", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.Location = new System.Drawing.Point(610, 13);
+            this.lblScore.Location = new System.Drawing.Point(3, 0);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(165, 73);
+            this.lblScore.Size = new System.Drawing.Size(141, 92);
             this.lblScore.TabIndex = 7;
             this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -155,9 +160,9 @@
             this.lblMoneda5.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda5.ImageIndex = 0;
             this.lblMoneda5.ImageList = this.imageListMoneda;
-            this.lblMoneda5.Location = new System.Drawing.Point(607, 393);
+            this.lblMoneda5.Location = new System.Drawing.Point(505, 393);
             this.lblMoneda5.Name = "lblMoneda5";
-            this.lblMoneda5.Size = new System.Drawing.Size(63, 61);
+            this.lblMoneda5.Size = new System.Drawing.Size(48, 41);
             this.lblMoneda5.TabIndex = 6;
             this.lblMoneda5.Visible = false;
             // 
@@ -166,9 +171,9 @@
             this.lblMoneda4.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda4.ImageIndex = 0;
             this.lblMoneda4.ImageList = this.imageListMoneda;
-            this.lblMoneda4.Location = new System.Drawing.Point(500, 341);
+            this.lblMoneda4.Location = new System.Drawing.Point(426, 312);
             this.lblMoneda4.Name = "lblMoneda4";
-            this.lblMoneda4.Size = new System.Drawing.Size(57, 53);
+            this.lblMoneda4.Size = new System.Drawing.Size(44, 47);
             this.lblMoneda4.TabIndex = 5;
             this.lblMoneda4.Visible = false;
             // 
@@ -177,9 +182,9 @@
             this.lblMoneda3.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda3.ImageIndex = 0;
             this.lblMoneda3.ImageList = this.imageListMoneda;
-            this.lblMoneda3.Location = new System.Drawing.Point(353, 300);
+            this.lblMoneda3.Location = new System.Drawing.Point(348, 393);
             this.lblMoneda3.Name = "lblMoneda3";
-            this.lblMoneda3.Size = new System.Drawing.Size(51, 54);
+            this.lblMoneda3.Size = new System.Drawing.Size(43, 46);
             this.lblMoneda3.TabIndex = 4;
             this.lblMoneda3.Visible = false;
             // 
@@ -188,9 +193,9 @@
             this.lblMoneda2.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda2.ImageIndex = 0;
             this.lblMoneda2.ImageList = this.imageListMoneda;
-            this.lblMoneda2.Location = new System.Drawing.Point(232, 388);
+            this.lblMoneda2.Location = new System.Drawing.Point(241, 355);
             this.lblMoneda2.Name = "lblMoneda2";
-            this.lblMoneda2.Size = new System.Drawing.Size(55, 66);
+            this.lblMoneda2.Size = new System.Drawing.Size(39, 51);
             this.lblMoneda2.TabIndex = 3;
             this.lblMoneda2.Visible = false;
             // 
@@ -199,9 +204,9 @@
             this.lblMoneda1.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda1.ImageIndex = 0;
             this.lblMoneda1.ImageList = this.imageListMoneda;
-            this.lblMoneda1.Location = new System.Drawing.Point(115, 275);
+            this.lblMoneda1.Location = new System.Drawing.Point(101, 406);
             this.lblMoneda1.Name = "lblMoneda1";
-            this.lblMoneda1.Size = new System.Drawing.Size(61, 56);
+            this.lblMoneda1.Size = new System.Drawing.Size(43, 43);
             this.lblMoneda1.TabIndex = 2;
             this.lblMoneda1.Visible = false;
             // 
@@ -212,9 +217,9 @@
             this.lblInformacion.Font = new System.Drawing.Font("Ink Free", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformacion.ForeColor = System.Drawing.Color.Black;
             this.lblInformacion.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.lblInformacion.Location = new System.Drawing.Point(73, 13);
+            this.lblInformacion.Location = new System.Drawing.Point(124, 0);
             this.lblInformacion.Name = "lblInformacion";
-            this.lblInformacion.Size = new System.Drawing.Size(522, 92);
+            this.lblInformacion.Size = new System.Drawing.Size(510, 92);
             this.lblInformacion.TabIndex = 1;
             this.lblInformacion.Text = "PRESS BAR TO PLAY";
             this.lblInformacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -224,10 +229,24 @@
             this.lblNegro.BackColor = System.Drawing.Color.Transparent;
             this.lblNegro.ImageIndex = 0;
             this.lblNegro.ImageList = this.imageListNegroLeft;
-            this.lblNegro.Location = new System.Drawing.Point(664, 341);
+            this.lblNegro.Location = new System.Drawing.Point(616, 346);
             this.lblNegro.Name = "lblNegro";
-            this.lblNegro.Size = new System.Drawing.Size(112, 161);
+            this.lblNegro.Size = new System.Drawing.Size(101, 147);
             this.lblNegro.TabIndex = 1;
+            // 
+            // timerPanel
+            // 
+            this.timerPanel.Enabled = true;
+            this.timerPanel.Interval = 500;
+            // 
+            // timerTiempo
+            // 
+            this.timerTiempo.Interval = 1000;
+            this.timerTiempo.Tick += new System.EventHandler(this.TimerTiempo_Tick);
+            // 
+            // timerpn
+            // 
+            this.timerpn.Enabled = true;
             // 
             // Form2
             // 
@@ -258,13 +277,14 @@
         private System.Windows.Forms.Label lblMoneda3;
         private System.Windows.Forms.Label lblMoneda2;
         private System.Windows.Forms.Label lblMoneda1;
-        private System.Windows.Forms.Timer timerMoneda1;
-        private System.Windows.Forms.Timer timerMoneda2;
-        private System.Windows.Forms.Timer timerMoneda3;
-        private System.Windows.Forms.Timer timerMoneda4;
-        private System.Windows.Forms.Timer timerMoneda5;
+        private System.Windows.Forms.Timer timerMonedas;
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.ImageList imageListNegroRight;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timerPanel;
+        private System.Windows.Forms.Label lblTiempo;
+        private System.Windows.Forms.Timer timerTiempo;
+        private System.Windows.Forms.Label lblGameOver;
+        public System.Windows.Forms.Timer timerpn;
     }
 }

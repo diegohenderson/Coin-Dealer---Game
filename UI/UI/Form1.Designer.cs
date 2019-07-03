@@ -156,9 +156,9 @@
             this.lblMoneda.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda.ImageIndex = 0;
             this.lblMoneda.ImageList = this.imageListMoneda;
-            this.lblMoneda.Location = new System.Drawing.Point(342, 229);
+            this.lblMoneda.Location = new System.Drawing.Point(363, 229);
             this.lblMoneda.Name = "lblMoneda";
-            this.lblMoneda.Size = new System.Drawing.Size(86, 69);
+            this.lblMoneda.Size = new System.Drawing.Size(65, 69);
             this.lblMoneda.TabIndex = 10;
             // 
             // timerMoneda

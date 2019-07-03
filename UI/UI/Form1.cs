@@ -22,7 +22,9 @@ namespace UI
             
             Form formjuego = new Form2();
             formjuego.ShowDialog();
-            
+            this.Dispose();
+            timerMoneda.Stop();
+            timerNegroIdle.Stop();
         }
 
 

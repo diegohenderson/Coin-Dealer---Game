@@ -6,11 +6,19 @@ namespace UI
     public enum Gamestate { Jugando, Detenido, Finalizado };
     public partial class Form2 : Form
     {
+
         Timer RelojAnimacionLeft = new Timer();
         Timer RelojAnimacionRight = new Timer();
+        
         Timer RelojMoneda = new Timer();
         int contadormonedas = 0;
+        Random RandomPosicionX = new Random();
+        Random RandomPosicionY = new Random();
         public Gamestate EstadoJuego = Gamestate.Detenido;
+        private int posX;
+        private int posY;
+        int tiempoRestante = 10;
+        int contadoranimacion;
         public Form2()
         {
             InitializeComponent();
@@ -18,45 +26,43 @@ namespace UI
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            RelojAnimacionNegro();
         }
-        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        public void Form2_KeyDown(object sender, KeyEventArgs e)
         {
             RelojAnimacionMoneda();
-            
+
             if (EstadoJuego == Gamestate.Detenido)
             {
-                
+
 
                 if (e.KeyCode == Keys.Space)
                 {
-                    timerMoneda1.Start();
-                    timerMoneda2.Start();
-                    timerMoneda3.Start();
-                    timerMoneda4.Start();
-                    timerMoneda5.Start();
+                    timerMonedas.Start();
                     lblMoneda1.Visible = true;
                     lblMoneda2.Visible = true;
                     lblMoneda3.Visible = true;
                     lblMoneda4.Visible = true;
                     lblMoneda5.Visible = true;
                     EstadoJuego = Gamestate.Jugando;
-                    
+
                     lblInformacion.Visible = false;
-                    
+
                 }
             }
             else if (EstadoJuego == Gamestate.Jugando)
             {
+                timerTiempo.Start();
                 
-                AgarrandoMonedas();
                 if (e.KeyCode == Keys.Left)
                 {
                     if (lblNegro.Location.X > 0)
                     {
                         lblNegro.Left = lblNegro.Left - 50;
-                        RelojAnimacionNegroLeft();
-
+                        
+                        
+                        AgarrandoMonedas();
+                        lblNegro.ImageList = imageListNegroLeft;
                     }
                 }
                 if (e.KeyCode == Keys.Right)
@@ -64,61 +70,85 @@ namespace UI
                     if (lblNegro.Location.X < 779)
                     {
                         lblNegro.Left = lblNegro.Left + 50;
-                        RelojAnimacionLeft.Stop();
-
+                        
+                        
+                        lblNegro.ImageList = imageListNegroRight;
+                        AgarrandoMonedas();
                     }
                 }
                 if (e.KeyCode == Keys.Up)
                 {
+                    if (lblNegro.Location.Y > 250)
+                    {
                     lblNegro.Top = lblNegro.Top - 50;
-                    RelojAnimacionLeft.Stop();
+                    
+                    AgarrandoMonedas();
 
+                    }
                 }
                 if (e.KeyCode == Keys.Down)
                 {
+                    if( lblNegro.Location.Y < 250)
+                    {
                     lblNegro.Top = lblNegro.Top + 50;
-                    RelojAnimacionLeft.Stop();
+                    
+                    AgarrandoMonedas();
+
+                    }
                 }
                 if (contadormonedas == 25) //Subo velocidad
                 {
-                    timerMoneda1.Interval = +10;
-                    timerMoneda2.Interval = +10;
-                    timerMoneda3.Interval = +10;
-                    timerMoneda4.Interval = +10;
-                    timerMoneda5.Interval = +10;
+                    //timerMoneda1.Interval += 10;
+
+                    timerMonedas.Interval = +10;
                 }
             }
-
+            if (EstadoJuego == Gamestate.Detenido)
+            {
+                lblGameOver.Visible = true;
+                lblTiempo.Show();
+                timerMonedas.Stop();
+                RelojAnimacionLeft.Stop();
+                RelojMoneda.Stop();
+            }
         }
         /// <summary>
         /// Colision y Agarra Monedas con contador
         /// </summary>
         public void AgarrandoMonedas()
         {
-            
+
             if (lblNegro.Bounds.IntersectsWith(lblMoneda1.Bounds))
             {
-                
+                lblMoneda1.Visible = false;
                 contadormonedas++;
                 
+
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda2.Bounds))
             {
+                lblMoneda2.Visible = false;
                 contadormonedas++;
+                
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda3.Bounds))
             {
+                lblMoneda3.Visible = false;
                 contadormonedas++;
+                
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda4.Bounds))
             {
+                lblMoneda4.Visible = false;
                 contadormonedas++;
+                
             }
             else if (lblNegro.Bounds.IntersectsWith(lblMoneda5.Bounds))
             {
+                lblMoneda5.Visible = false;
                 contadormonedas++;
             }
-            
+
             lblScore.Text = contadormonedas.ToString();
         }
 
@@ -130,39 +160,31 @@ namespace UI
             RelojMoneda.Tick += new EventHandler(AnimacionMoneda);
 
         }
-        public void RelojAnimacionNegroLeft()
+        public void RelojAnimacionNegro()
         {
-            RelojAnimacionLeft.Interval = 50;
+            RelojAnimacionLeft.Interval = 500;
             RelojAnimacionLeft.Start();
-            RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegroLeft);
+            RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
 
         }
-        public void RelojAnimacionNegroRight()
+        
+        //public void RelojAnimacionNegroRight()
+        //{
+        //    RelojAnimacionRight.Interval = 50;
+        //    RelojAnimacionRight.Start();
+        //    RelojAnimacionRight.Tick += new EventHandler(AnimacionNegroRight);
+        //}
+
+        public void AnimacionNegro(object sender, EventArgs e)
         {
-            RelojAnimacionRight.Interval = 50;
-            RelojAnimacionRight.Start();
-            RelojAnimacionRight.Tick += new EventHandler(AnimacionNegroRight);
-        }
-        public void AnimacionNegroRight(object sender, EventArgs e)
-        {
-            //if (lblNegro.ImageIndex < 6)
-            //{
-            //    lblNegro.ImageIndex = lblNegro.ImageIndex + 1;
-            //}
-            //else
-            //{
-            //    lblNegro.ImageIndex = 1;
-            //}
-        }
-        public void AnimacionNegroLeft(object sender, EventArgs e)
-        {
-            if (lblNegro.ImageIndex < 7)
+
+            if (lblNegro.ImageIndex == lblNegro.ImageList.Images.Count-1)
             {
-                lblNegro.ImageIndex = lblNegro.ImageIndex + 1;
+                lblNegro.ImageIndex=0;
             }
             else
             {
-                lblNegro.ImageIndex = 1;
+                lblNegro.ImageIndex++;
             }
         }
         /// <summary>
@@ -190,57 +212,72 @@ namespace UI
             }
         }
         /// <summary>
-        /// Timer para Monedas con su Timer Correspondiente
-        /// 
+        /// Timer para Monedas, posicion, lugar,colision con su Timer Correspondiente
         /// </summary>
-        /// <param lblMoneda1="sender"></param>
-        /// <param TimerMoneda1_Tick="e"></param>
+        
         private void TimerMoneda1_Tick(object sender, EventArgs e)
         {
             lblMoneda1.Left = lblMoneda1.Left + 1;
-            if (lblMoneda1.Left >= pnEscenario.Width)
+            if (lblMoneda1.Left >= pnEscenario.Width || lblNegro.Bounds.IntersectsWith(lblMoneda1.Bounds))
             {
-                lblMoneda1.Left = lblMoneda1.Left - lblMoneda1.Right;
+                posX = RandomPosicionX.Next(0, 779);
+                posY = RandomPosicionY.Next(150, 512);
+                lblMoneda1.Location = new System.Drawing.Point(posX, posY);
+                lblMoneda1.Visible = true;
             }
-        }
-
-        private void TimerMoneda2_Tick(object sender, EventArgs e)
-        {
+            
+            ///
             lblMoneda2.Left = lblMoneda2.Left + 2;
-            if (lblMoneda2.Left >= pnEscenario.Width)
+            if (lblMoneda2.Left >= pnEscenario.Width || lblNegro.Bounds.IntersectsWith(lblMoneda2.Bounds))
             {
-                lblMoneda2.Left = lblMoneda2.Left - lblMoneda2.Right;
+                posX = RandomPosicionX.Next(0, 779);
+                posY = RandomPosicionY.Next(150, 512);
+                lblMoneda2.Location = new System.Drawing.Point(posX, posY);
+                lblMoneda2.Visible = true;
             }
-
-        }
-
-        private void TimerMoneda3_Tick(object sender, EventArgs e)
-        {
+            ///
             lblMoneda3.Left = lblMoneda3.Left + 3;
-            if (lblMoneda3.Left >= pnEscenario.Width)
+            if (lblMoneda3.Left >= pnEscenario.Width || lblNegro.Bounds.IntersectsWith(lblMoneda3.Bounds))
             {
-                lblMoneda3.Left = lblMoneda3.Left - lblMoneda3.Right;
+                posX = RandomPosicionX.Next(0, 779);
+                posY = RandomPosicionY.Next(150, 512);
+                lblMoneda3.Location = new System.Drawing.Point(posX, posY);
+                lblMoneda3.Visible = true;
             }
-
-        }
-
-        private void TimerMoneda4_Tick(object sender, EventArgs e)
-        {
+            ///
             lblMoneda4.Left = lblMoneda4.Left + 4;
-            if (lblMoneda4.Left >= pnEscenario.Width)
+            if (lblMoneda4.Left >= pnEscenario.Width || lblNegro.Bounds.IntersectsWith(lblMoneda4.Bounds))
             {
-                lblMoneda4.Left = lblMoneda4.Left - lblMoneda4.Right;
+                posX = RandomPosicionX.Next(0, 779);
+                posY = RandomPosicionY.Next(150, 512);
+                lblMoneda4.Location = new System.Drawing.Point(posX, posY);
+                lblMoneda4.Visible = true;
             }
-
+            ///
+            lblMoneda5.Left = lblMoneda5.Left + 5;
+            if (lblMoneda5.Left >= pnEscenario.Width || lblNegro.Bounds.IntersectsWith(lblMoneda5.Bounds))
+            {
+                posX = RandomPosicionX.Next(0, 779);
+                posY = RandomPosicionY.Next(150, 512);
+                lblMoneda5.Location = new System.Drawing.Point(posX, posY);
+                lblMoneda5.Visible = true;
+            }
         }
 
-        private void TimerMoneda5_Tick(object sender, EventArgs e)
+
+
+
+        
+
+        public void TimerTiempo_Tick(object sender, EventArgs e)
         {
-            lblMoneda5.Left = lblMoneda5.Left + 5;
-            if (lblMoneda5.Left >= pnEscenario.Width)
+            tiempoRestante = tiempoRestante - 1;
+            lblTiempo.Text = "time left: " + tiempoRestante.ToString();
+            if (tiempoRestante < 1)
             {
-                Random posicionaleatoria = new Random();
-                lblMoneda5.Left = lblMoneda5.Left - ((posicionaleatoria.Next(0, 600)) + lblMoneda5.Right);
+                timerTiempo.Stop();
+                
+                EstadoJuego = Gamestate.Detenido;
             }
 
         }
