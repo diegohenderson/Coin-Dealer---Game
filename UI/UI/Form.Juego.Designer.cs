@@ -118,7 +118,7 @@
             this.lblGameOver.Cursor = System.Windows.Forms.Cursors.No;
             this.lblGameOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.lblGameOver.Font = new System.Drawing.Font("Ink Free", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGameOver.Location = new System.Drawing.Point(275, 92);
+            this.lblGameOver.Location = new System.Drawing.Point(258, 80);
             this.lblGameOver.Name = "lblGameOver";
             this.lblGameOver.Size = new System.Drawing.Size(274, 154);
             this.lblGameOver.TabIndex = 10;

@@ -117,9 +117,9 @@
             this.lblAnimacionNegroIdle.BackColor = System.Drawing.Color.Transparent;
             this.lblAnimacionNegroIdle.ImageIndex = 0;
             this.lblAnimacionNegroIdle.ImageList = this.imageListNegroIdle;
-            this.lblAnimacionNegroIdle.Location = new System.Drawing.Point(504, 218);
+            this.lblAnimacionNegroIdle.Location = new System.Drawing.Point(489, 227);
             this.lblAnimacionNegroIdle.Name = "lblAnimacionNegroIdle";
-            this.lblAnimacionNegroIdle.Size = new System.Drawing.Size(178, 228);
+            this.lblAnimacionNegroIdle.Size = new System.Drawing.Size(147, 201);
             this.lblAnimacionNegroIdle.TabIndex = 9;
             // 
             // imageListNegroIdle
@@ -156,9 +156,9 @@
             this.lblMoneda.BackColor = System.Drawing.Color.Transparent;
             this.lblMoneda.ImageIndex = 0;
             this.lblMoneda.ImageList = this.imageListMoneda;
-            this.lblMoneda.Location = new System.Drawing.Point(363, 229);
+            this.lblMoneda.Location = new System.Drawing.Point(369, 229);
             this.lblMoneda.Name = "lblMoneda";
-            this.lblMoneda.Size = new System.Drawing.Size(65, 69);
+            this.lblMoneda.Size = new System.Drawing.Size(59, 49);
             this.lblMoneda.TabIndex = 10;
             // 
             // timerMoneda

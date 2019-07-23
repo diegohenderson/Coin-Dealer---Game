@@ -25,6 +25,7 @@ namespace UI
             this.Dispose();
             timerMoneda.Stop();
             timerNegroIdle.Stop();
+            
         }
 
 

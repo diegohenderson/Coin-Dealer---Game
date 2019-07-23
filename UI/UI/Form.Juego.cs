@@ -76,15 +76,16 @@ namespace UI
                         AgarrandoMonedas();
                     }
                 }
-                if (e.KeyCode == Keys.Up)
+                if (e.KeyCode == Keys.Space)
                 {
                     if (lblNegro.Location.Y > 250)
                     {
-                    lblNegro.Top = lblNegro.Top - 50;
-                    
-                    AgarrandoMonedas();
+                        lblNegro.Top = lblNegro.Top - 50;
+
+                        AgarrandoMonedas();
 
                     }
+                    
                 }
                 if (e.KeyCode == Keys.Down)
                 {
@@ -167,7 +168,7 @@ namespace UI
         /// </summary>
         public void RelojAnimacionNegro()
         {
-            RelojAnimacionLeft.Interval = 500;
+            RelojAnimacionLeft.Interval = 200;
             RelojAnimacionLeft.Start();
             RelojAnimacionLeft.Tick += new EventHandler(AnimacionNegro);
 
